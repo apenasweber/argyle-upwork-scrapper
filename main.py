@@ -70,3 +70,19 @@ class LoginUpwork:
     address: //*[@id="main"]/div[2]/div[2]/div/main/div[3]/section/div[2]/div[2]
     Phone: //*[@id="main"]/div[2]/div[2]/div/main/div[3]/section/div[3]/div[2]
     """
+
+    def get_data(self):
+        """
+        Function to get the data from the user profile
+        """
+        driver.get("https://www.upwork.com/freelancers/settings/contactInfo")
+        user_id = driver.find_element_by_xpath('//*[@id="main"]/div[2]/div[2]/div/main/div[1]/section/div[1]/div[2]').text
+        name = driver.find_element_by_xpath('//*[@id="main"]/div[2]/div[2]/div/main/div[1]/section/div[2]/div[2]').text
+        timezone = driver.find_element_by_xpath('//*[@id="main"]/div[2]/div[2]/div/main/div[3]/section/div[1]/div[2]').text
+        address = driver.find_element_by_xpath('//*[@id="main"]/div[2]/div[2]/div/main/div[3]/section/div[2]/div[2]').text
+        phone = driver.find_element_by_xpath('//*[@id="main"]/div[2]/div[2]/div/main/div[3]/section/div[3]/div[2]').text
+        print("User ID: " + user_id)
+        print("Name: " + name)
+        print("Timezone: " + timezone)
+        print("Address: " + address)
+        print("Phone: " + phone)
