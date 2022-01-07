@@ -1,5 +1,4 @@
 import requests
-import beautifulsoup
 import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -8,6 +7,7 @@ chrome_options = Options()
 chrome_options.add_argument("--disable-gpu")
 chrome_options.add_argument("--disable-extensions")
 chrome_options.headless = True
+
 chromedriver = "/Users/Downloads/chromedriver"
 driver = webdriver.Chrome(chromedriver)
 
@@ -28,7 +28,7 @@ submit3: //*[@id="login_control_continue"]
 """
 # https://limeproxies.netlify.app/blog/selenium-vs-beautifulsoup
 
-class LoginUpwork:
+class UpworkScraper:
     
     _url = "https://www.upwork.com/ab/account-security/login"
     
@@ -61,15 +61,6 @@ class LoginUpwork:
         if driver.current_url == "https://www.upwork.com/nx/find-work/best-matches":
             print("Login successful")
 
-    """
-    TAKE DATA
-    access: https://www.upwork.com/freelancers/settings/contactInfo
-    user_id: //*[@id="main"]/div[2]/div[2]/div/main/div[1]/section/div[1]/div[2]
-    name: //*[@id="main"]/div[2]/div[2]/div/main/div[1]/section/div[2]/div[2]
-    timezone: //*[@id="main"]/div[2]/div[2]/div/main/div[3]/section/div[1]/div[2]
-    address: //*[@id="main"]/div[2]/div[2]/div/main/div[3]/section/div[2]/div[2]
-    Phone: //*[@id="main"]/div[2]/div[2]/div/main/div[3]/section/div[3]/div[2]
-    """
 
     def get_data(self):
         """
