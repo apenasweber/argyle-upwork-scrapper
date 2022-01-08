@@ -1,6 +1,6 @@
 FROM python:3.7
-WORKDIR /the/workdir/path
+WORKDIR /app
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+RUN pip install -r ./app/requirements.txt
 COPY . .
 CMD [ "python", "main.py" ]
