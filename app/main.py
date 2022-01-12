@@ -1,5 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+import os
+import json
 
 chrome_options = Options()
 chrome_options.add_argument("--disable-gpu")
@@ -13,7 +15,7 @@ class UpworkScraper:
     
     _url = "https://www.upwork.com/ab/account-security/login"
     
-    def __init__(self , username, secret_word, password):
+    def __init__(self , username=os.getenv("USERNAME"), secret_word=os.getenv("SECRET_WORD"), password=os.getenv("PASSWORD")):
         self.username = username
         self.secret_word = secret_word
         self.password = password
@@ -53,8 +55,20 @@ class UpworkScraper:
         timezone = driver.find_element_by_xpath('//*[@id="main"]/div[2]/div[2]/div/main/div[3]/section/div[1]/div[2]').text
         address = driver.find_element_by_xpath('//*[@id="main"]/div[2]/div[2]/div/main/div[3]/section/div[2]/div[2]').text
         phone = driver.find_element_by_xpath('//*[@id="main"]/div[2]/div[2]/div/main/div[3]/section/div[3]/div[2]').text
-        print("User ID: " + user_id)
-        print("Name: " + name)
-        print("Timezone: " + timezone)
-        print("Address: " + address)
-        print("Phone: " + phone)
+
+        data_dict = {
+            "user-id": user_id,
+            "name": name,
+            "timezone": timezone,
+            "address": address,
+            "phone": phone,
+        }
+        
+        with open("upwork_data.txt", "w") as f:
+            json.dump(data_dict, f)
+        print("Data saved in upwork_data.txt")
+
+if __name__ == "__main__":
+    scraper = UpworkScraper()
+    scraper.do_login()
+    scraper.get_data()
